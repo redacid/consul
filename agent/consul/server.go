@@ -1054,6 +1054,14 @@ func (s *Server) PrimaryMeshGatewayAddressesReadyCh() <-chan struct{} {
 	return s.gatewayLocator.PrimaryMeshGatewayAddressesReadyCh()
 }
 
+// TODO: for testing
+func (s *Server) PickRandomMeshGatewaySuitableForDialing(dc string) string {
+	if s.gatewayLocator == nil {
+		return ""
+	}
+	return s.gatewayLocator.PickGateway(dc)
+}
+
 func (s *Server) RefreshPrimaryGatewayFallbackAddresses(addrs []string) (int, error) {
 	sort.Strings(addrs)
 
