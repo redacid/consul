@@ -1,12 +1,12 @@
 ---
 layout: "docs"
-page_title: "Out-of-Cluster Nodes - Kubernetes"
-sidebar_current: "docs-platform-k8s-ooc-nodes"
+page_title: "Clients Outside of Kubernetes - Kubernetes"
+sidebar_current: "docs-platform-k8s-run-clients-outside"
 description: |-
   Non-Kubernetes nodes can join a Consul cluster running within Kubernetes. These are considered "out-of-cluster" nodes.
 ---
 
-# Out-of-Cluster Nodes
+# Clients Outside Kubernetes
 
 Non-Kubernetes nodes can join a Consul cluster running within Kubernetes.
 These are considered "out-of-cluster" nodes.
