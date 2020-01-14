@@ -4063,8 +4063,8 @@ func TestAgent_JoinWAN_viaMeshGateway(t *testing.T) {
 
 			out, ok := obj.(structs.FederationStateResponse)
 			require.True(r, ok)
-			require.NotNil(r, out.Config)
-			require.Len(r, out.Config.MeshGateways, 1)
+			require.NotNil(r, out.State)
+			require.Len(r, out.State.MeshGateways, 1)
 		})
 	}
 
@@ -4244,5 +4244,4 @@ func TestAgent_JoinWAN_viaMeshGateway(t *testing.T) {
 			})
 		}
 	}
-
 }
