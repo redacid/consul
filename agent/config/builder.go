@@ -574,9 +574,10 @@ func (b *Builder) Build() (rt RuntimeConfig, err error) {
 	if connectCAConfig != nil {
 		lib.TranslateKeys(connectCAConfig, map[string]string{
 			// Consul CA config
-			"private_key":     "PrivateKey",
-			"root_cert":       "RootCert",
-			"rotation_period": "RotationPeriod",
+			"private_key":           "PrivateKey",
+			"root_cert":             "RootCert",
+			"rotation_period":       "RotationPeriod",
+			"intermediate_cert_ttl": "IntermediateCertTTL",
 
 			// Vault CA config
 			"address":               "Address",
