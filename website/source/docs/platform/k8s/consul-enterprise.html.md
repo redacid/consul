@@ -10,9 +10,9 @@ description: |-
 
 You can use this Helm chart to deploy Consul Enterprise by following a few extra steps.
 
-Find the license file that you received in your welcome email. It should have the extension `.hclic`. You will use the contents of this file to create a Kubernetes secret before installing the Helm chart.
+Find the license file that you received in your welcome email. It should have a `.hclic` extension. You will use the contents of this file to create a Kubernetes secret before installing the Helm chart.
 
-You can use the following commands to create the secret:
+You can use the following commands to create the secret with name `consul-ent-license` and key `key`:
 
 ```bash
 secret=$(cat 1931d1f4-bdfd-6881-f3f5-19349374841f.hclic)
@@ -29,7 +29,7 @@ global:
   image: "hashicorp/consul-enterprise:1.4.3-ent"
 ```
 
-Add the name of the secret you just created to `server.enterpriseLicense`.
+Add the name and key of the secret you just created to `server.enterpriseLicense`.
 
 ```yaml
 # config.yaml
@@ -88,17 +88,16 @@ Error getting license: invalid character 'r' looking for beginning of value
 ```
 
 Then you have likely enabled ACLs. You need to specify your ACL token when
-running the `license get` command. First, get the ACL token:
+running the `license get` command. First, assign the ACL token to the `CONSUL_HTTP_TOKEN` environment variable:
 
 ```bash
-$ kubectl get secrets/hashicorp-consul-bootstrap-acl-token --template={{.data.token}} | base64 -D
-4dae8373-b4d7-8009-9880-a796850caef9%
+$ export CONSUL_HTTP_TOKEN=$(kubectl get secrets/hashicorp-consul-bootstrap-acl-token --template={{.data.token}} | base64 -D)
 ```
 
-Now use the token when running the `license get` command:
+Now use the token will be used when running consul commands:
 
 ```bash
-$ consul license get -token=4dae8373-b4d7-8009-9880-a796850caef9
+$ consul license get
 License is valid
 License ID: 1931d1f4-bdfd-6881-f3f5-19349374841f
 Customer ID: b2025a4a-8fdd-f268-95ce-1704723b9996
